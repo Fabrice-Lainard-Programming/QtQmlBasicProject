@@ -18,6 +18,7 @@ Anenometer::Anenometer(const QString& name,SignalStrength signalStrength, Sensor
     : Sensor(name,signalStrength,state)
 {
 }
+
 // -------------------------------------------------------------------------
 
 float Anenometer::getWindDirection() const

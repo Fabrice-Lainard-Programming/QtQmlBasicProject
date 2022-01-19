@@ -19,7 +19,7 @@ namespace DICE
 /**
  * @brief The Anenometer class is a specific sensor
  */
-class Anenometer : public Sensor
+class DATAMODEL_EXPORT Anenometer : public Sensor
 {
     Q_OBJECT
 public:
