@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>DeviceList.qml</file>
+        <file>SensorItemDelegate.qml</file>
+        <file>GPSItemDelegate.qml</file>
+        <file>CompassItemDelegate.qml</file>
+        <file>AnenometerItemDelegate.qml</file>
+        <file>GyroItemDelegate.qml</file>
+    </qresource>
+</RCC>
