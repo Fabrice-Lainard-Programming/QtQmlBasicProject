@@ -24,6 +24,7 @@ HEADERS += \
     DataModel_global.h \
     GPS.h \
     Gyro.h \
+    MonitorCallBack.h \
     MonitorSensorSource.h \
     Sensor.h \
     SensorModel.h \

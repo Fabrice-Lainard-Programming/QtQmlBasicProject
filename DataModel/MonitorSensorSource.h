@@ -10,9 +10,7 @@
 
 #include "DataModel_global.h"
 #include "SensorModel.h"
-#include "WGS84Coordinates.h"
-#include <QSharedData>
-#include <QExplicitlySharedDataPointer>
+#include "MonitorCallBack.h"
 #include <QThread>
 #include <QQueue>
 #include <QMutexLocker>
@@ -21,19 +19,6 @@
 
 namespace DICE
 {
-
-/**
- * @brief The UpdateBlock struct
- */
-struct UpdateBlock : public QSharedData
-{
-    int _sensorIndex = 0;
-    int _signalStrength = 0;
-    SensorState _state = SensorState::Error;
-    QDateTime _dt;
-};
-
-
 
 /**
  * @brief The MonitorSensorSource class monitors data coming from the acquisition
@@ -48,19 +33,21 @@ public:
      * @brief create add a shared monitor
      * @return a shared object
      */
-    static QExplicitlySharedDataPointer<MonitorSensorSource> create(QExplicitlySharedDataPointer<SensorModel> model)
+    static QExplicitlySharedDataPointer<MonitorSensorSource> create(QExplicitlySharedDataPointer<SensorModel> model,
+                                                                    QExplicitlySharedDataPointer<MonitorCallBack> callback)
     {
-        return QExplicitlySharedDataPointer<MonitorSensorSource>(new MonitorSensorSource(model));
+        return QExplicitlySharedDataPointer<MonitorSensorSource>(new MonitorSensorSource(model,callback));
     }
 
     /**
-     * @brief stop
+     * @brief stop monitoring
      */
     void stop();
 
 
 protected:
-    explicit MonitorSensorSource(QExplicitlySharedDataPointer<SensorModel> model);
+    explicit MonitorSensorSource(QExplicitlySharedDataPointer<SensorModel> model,
+                                 QExplicitlySharedDataPointer<MonitorCallBack> callback);
     Q_DISABLE_COPY(MonitorSensorSource)
     void run() override;
     void readData();
@@ -69,48 +56,12 @@ protected:
 
 private:
     QExplicitlySharedDataPointer<SensorModel> _model;
+    QExplicitlySharedDataPointer<MonitorCallBack> _callback;
     QThread _workerThread;
     bool _exit = false;
     QMutex _mutex;
     QQueue<QExplicitlySharedDataPointer<UpdateBlock>> _queue;
     QTimer *_UIThreadTimer = nullptr;
-};
-
-/**
- * @brief The UpdateAnenometer struct
- */
-struct UpdateAnenometer : public UpdateBlock
-{
-    float _windDirection = 0;
-    float _windGust = 0;
-};
-
-
-
-/**
- * @brief The UpdateGyro struct
- */
-struct UpdateGyro : public UpdateBlock
-{
-     float _angle = 0;
-};
-
-
-/**
- * @brief The UpdateGps struct
- */
-struct UpdateGps : public UpdateBlock
-{
-    WGS84Coordinates _wgs84Coordinates;
-};
-
-
-/**
- * @brief The UpdateGps struct
- */
-struct UpdateCompass : public UpdateBlock
-{
-    float _boatDirection = 0;
 };
 
 
