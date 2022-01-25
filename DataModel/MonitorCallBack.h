@@ -26,6 +26,10 @@ struct UpdateBlock : public QSharedData
     int _signalStrength = 0;
     SensorState _state = SensorState::Error;
     QDateTime _dt;
+    virtual ~UpdateBlock()
+    {
+
+    }
 };
 
 
@@ -36,6 +40,10 @@ struct UpdateAnenometer : public UpdateBlock
 {
     float _windDirection = 0;
     float _windGust = 0;
+    virtual ~UpdateAnenometer()
+    {
+
+    }
 };
 
 
@@ -46,6 +54,10 @@ struct UpdateAnenometer : public UpdateBlock
 struct UpdateGyro : public UpdateBlock
 {
      float _angle = 0;
+     virtual ~UpdateGyro()
+     {
+
+     }
 };
 
 
@@ -55,6 +67,10 @@ struct UpdateGyro : public UpdateBlock
 struct UpdateGps : public UpdateBlock
 {
     WGS84Coordinates _wgs84Coordinates;
+    virtual ~UpdateGps()
+    {
+
+    }
 };
 
 
@@ -64,6 +80,10 @@ struct UpdateGps : public UpdateBlock
 struct UpdateCompass : public UpdateBlock
 {
     float _boatDirection = 0;
+    virtual ~UpdateCompass()
+    {
+
+    }
 };
 
 
