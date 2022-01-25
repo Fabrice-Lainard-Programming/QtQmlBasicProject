@@ -1,2 +1,2 @@
 # QtQmlBasicProject
-A basic C++ Qt/QML project with used as a template for data acquisition project
+A basic C++ Qt/QML project that is used as a template for the data acquisition project

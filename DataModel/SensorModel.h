@@ -24,7 +24,7 @@ class DATAMODEL_EXPORT SensorModel : public QAbstractListModel, public QSharedDa
 {
     Q_OBJECT
 public:
-    enum AnimalRoles {
+    enum SensorRoles {
         NameRole = Qt::UserRole + 1,
         SignalStrengthRole,
         StateRole,
